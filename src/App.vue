@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <task-bar :renewal="sharedState.currentRenewal"></task-bar>
+    <table class="table">
+      <thead>
+        <th>Bond Number</th>
+        <th>Principal Name</th>
+        <th>Status</th>
+      </thead>
+      <tbody>
+        <table-row
+          v-for="renewal in sharedState.renewals"
+          :renewal="renewal"
+          :key="renewal.id"
+        ></table-row>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import TableRow from "./components/TableRow.vue";
+import TaskBar from "./components/TaskBar.vue";
+import sharedState from "./sharedState";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    "table-row": TableRow,
+    "task-bar": TaskBar
+  },
+  data() {
+    return {
+      sharedState: sharedState
+    };
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
